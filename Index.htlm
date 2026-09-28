@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="description" content="LAMxSEARCH — Moteur de recherche rapide, privé et professionnel. Web, images, vidéos, actualités et cartes, sans traçage." />
+<meta name="keywords" content="LAMxSEARCH, moteur de recherche, search engine, privacy, privé, rapide" />
+<meta name="author" content="LAMxSEARCH" />
+<meta name="theme-color" content="#0a66ff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0f1116" media="(prefers-color-scheme: dark)" />
+<meta name="color-scheme" content="light dark" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="LAMxSEARCH" />
+<meta property="og:description" content="Le moteur de recherche rapide, privé et professionnel." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="assets/img/og-image.png" />
+<meta property="og:url" content="https://lamxsearch.github.io/" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+<link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
+<link rel="manifest" href="manifest.json" />
+<link rel="preconnect" href="https://api.duckduckgo.com" />
+<link rel="dns-prefetch" href="https://api.duckduckgo.com" />
+
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/components.css" />
+<link rel="stylesheet" href="css/layout.css" />
+
+<title>LAMxSEARCH — Moteur de recherche</title>
+</head>
+<body data-page="home">
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand" aria-label="Accueil LAMxSEARCH">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="28" height="28">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#0a66ff"/>
+              <stop offset="1" stop-color="#00c2ff"/>
+            </linearGradient>
+          </defs>
+          <circle cx="14" cy="14" r="9" fill="none" stroke="url(#g1)" stroke-width="3"/>
+          <line x1="21" y1="21" x2="28" y2="28" stroke="url(#g1)" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span class="brand-text"><b>LAM</b><i>x</i><span>SEARCH</span></span>
+    </a>
+
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="index.html" class="active">Accueil</a>
+      <a href="about.html">À propos</a>
+      <a href="#features">Fonctions</a>
+    </nav>
+
+    <div class="header-tools">
+      <button id="themeToggle" class="icon-btn" aria-label="Basculer le thème" title="Thème (Ctrl+J)">🌙</button>
+      <button id="settingsBtn" class="icon-btn" aria-label="Paramètres" title="Paramètres">⚙️</button>
+      <button id="menuBtn" class="icon-btn mobile-only" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ MAIN ============ -->
+<main class="site-main">
+
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <h1 id="heroTitle" class="hero-title">
+        <span class="grad">LAM</span><i>x</i><span>SEARCH</span>
+      </h1>
+      <p class="hero-tagline">Le moteur de recherche rapide, privé et professionnel.</p>
+
+      <!-- Search form -->
+      <form id="searchForm" class="search-form" role="search" action="search.html" method="get" autocomplete="off">
+        <div class="search-shell">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+
+          <input id="searchInput" name="q" type="text" placeholder="Rechercher sur le web…"
+                 aria-label="Recherche" aria-autocomplete="list" aria-controls="suggestions" autofocus />
+
+          <button type="button" id="clearBtn" class="clear-btn" aria-label="Effacer" hidden>✕</button>
+
+          <button type="button" id="voiceBtn" class="voice-btn" aria-label="Recherche vocale" title="Recherche vocale">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2a3 3 0 0 1 3 3v6a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
+              <path d="M19 10v1a7 7 0 0 1-14 0v-1"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+            </svg>
+          </button>
+
+          <button type="submit" class="search-btn" aria-label="Rechercher">Rechercher</button>
+        </div>
+
+        <ul id="suggestions" class="suggestions" role="listbox" hidden></ul>
+
+        <div class="tabs" role="tablist" aria-label="Type de recherche">
+          <button class="tab is-active" data-tab="web" role="tab" aria-selected="true">🌐 Web</button>
+          <button class="tab" data-tab="images" role="tab" aria-selected="false">🖼️ Images</button>
+          <button class="tab" data-tab="videos" role="tab" aria-selected="false">🎬 Vidéos</button>
+          <button class="tab" data-tab="news" role="tab" aria-selected="false">📰 Actualités</button>
+          <button class="tab" data-tab="maps" role="tab" aria-selected="false">🗺️ Maps</button>
+        </div>
+      </form>
+
+      <!-- Quick links -->
+      <div class="quick-grid" aria-label="Accès rapides">
+        <a href="https://github.com" target="_blank" rel="noopener" class="quick-card">
+          <span class="quick-ico">🐙</span><span>GitHub</span>
+        </a>
+        <a href="https://stackoverflow.com" target="_blank" rel="noopener" class="quick-card">
+          <span class="quick-ico">💬</span><span>StackOverflow</span>
+        </a>
+        <a href="https://developer.mozilla.org" target="_blank" rel="noopener" class="quick-card">
+          <span class="quick-ico">📘</span><span>MDN</span>
+        </a>
+        <a href="https://fr.wikipedia.org" target="_blank" rel="noopener" class="quick-card">
+          <span class="quick-ico">📚</span><span>Wikipédia</span>
+        </a>
+        <a href="https://news.ycombinator.com" target="_blank" rel="noopener" class="quick-card">
+          <span class="quick-ico">📰</span><span>HN</span>
+        </a>
+        <a href="https://youtube.com" target="_blank" rel="noopener" class="quick-card">
+          <span class="quick-ico">▶️</span><span>YouTube</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="features">
+    <div class="container">
+      <h2 class="section-title">Pourquoi LAMxSEARCH ?</h2>
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-ico">⚡</div>
+          <h3>Ultra rapide</h3>
+          <p>Aucune dépendance lourde. Chargement instantané, même en 3G.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-ico">🔒</div>
+          <h3>Confidentiel</h3>
+          <p>Aucun cookie de traçage. Vos recherches restent sur votre appareil.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-ico">🎨</div>
+          <h3>Design moderne</h3>
+          <p>Interface épurée, thème clair/sombre automatique, 100 % responsive.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-ico">📱</div>
+          <h3>PWA installable</h3>
+          <p>Installez LAMxSEARCH comme une application sur mobile ou desktop.</p>
+        </article>
+        <article class="feature-ico-wrap feature-card">
+          <div class="feature-ico">⌨️</div>
+          <h3>Raccourcis</h3>
+          <p>Ctrl+K, Ctrl+J, /, Échap… Naviguez au clavier comme un pro.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-ico">🌍</div>
+          <h3>Multi-moteurs</h3>
+          <p>Web, images, vidéos, actualités et cartes dans une seule interface.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> <b>LAMxSEARCH</b> — Fait avec ❤️ et beaucoup de JavaScript.</p>
+    <nav class="footer-nav" aria-label="Liens légaux">
+      <a href="about.html">À propos</a>
+      <a href="privacy.html">Confidentialité</a>
+      <a href="terms.html">Conditions</a>
+      <a href="sitemap.xml">Sitemap</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- ============ SETTINGS PANEL ============ -->
+<aside id="settingsPanel" class="settings-panel" aria-hidden="true" aria-label="Paramètres">
+  <div class="settings-inner">
+    <header class="settings-head">
+      <h2>Paramètres</h2>
+      <button id="settingsClose" class="icon-btn" aria-label="Fermer">✕</button>
+    </header>
+
+    <div class="settings-body">
+      <div class="setting">
+        <label for="themeSelect">Thème</label>
+        <select id="themeSelect">
+          <option value="light">Clair</option>
+          <option value="dark">Sombre</option>
+          <option value="auto">Automatique (système)</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label for="engineSelect">Moteur par défaut</label>
+        <select id="engineSelect">
+          <option value="lamx">LAMxSEARCH (interne)</option>
+          <option value="ddg">DuckDuckGo</option>
+          <option value="google">Google</option>
+          <option value="bing">Bing</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <label class="switch">
+          <input type="checkbox" id="suggestToggle" checked />
+          <span>Suggestions automatiques</span>
+        </label>
+      </div>
+
+      <div class="setting">
+        <label class="switch">
+          <input type="checkbox" id="historyToggle" checked />
+          <span>Enregistrer l'historique local</span>
+        </label>
+      </div>
+
+      <button id="clearHistory" class="btn btn-danger">Effacer l'historique</button>
+    </div>
+  </div>
+  <div id="settingsOverlay" class="settings-overlay"></div>
+</aside>
+
+<!-- Toast -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
