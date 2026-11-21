@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LAMxSEARCH, une page de recherche simple et privée.">
+  <meta name="theme-color" content="#0b1220">
+  <title>LAMxSEARCH — Recherche</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #0b1220; color: #eef4ff; }
+    * { box-sizing: border-box; }
+    body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; }
+    main { width: min(100%, 720px); text-align: center; }
+    h1 { margin: 0; font-size: clamp(2.4rem, 8vw, 4.5rem); letter-spacing: -.06em; }
+    h1 span { color: #51a4ff; }
+    p { color: #b8c7dc; line-height: 1.6; }
+    form { display: flex; gap: 10px; margin: 32px 0 16px; }
+    input { flex: 1; min-width: 0; border: 1px solid #42516a; border-radius: 12px; padding: 15px 16px; background: #141e30; color: inherit; font: inherit; }
+    button { border: 0; border-radius: 12px; padding: 0 22px; background: #1677ff; color: white; font: inherit; font-weight: 650; cursor: pointer; }
+    button:hover { background: #388cff; }
+    input:focus-visible, button:focus-visible { outline: 3px solid #9bc9ff; outline-offset: 3px; }
+    small { color: #90a2ba; }
+    @media (max-width: 480px) { form { flex-direction: column; } button { padding: 14px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>LAM<span>x</span>SEARCH</h1>
+    <p>Une recherche simple, sans compte ni suivi ajouté par cette page.</p>
+    <form action="https://duckduckgo.com/" method="get">
+      <label for="q" hidden>Rechercher sur le Web</label>
+      <input id="q" name="q" type="search" placeholder="Rechercher sur le Web…" autocomplete="off" required autofocus>
+      <button type="submit">Rechercher</button>
+    </form>
+    <small>La recherche est transmise à DuckDuckGo pour afficher les résultats.</small>
+  </main>
+</body>
+</html>
